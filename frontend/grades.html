@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Выставление оценок</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+  <div class="page-head">
+    <a class="tag btn-link" href="groups.html">← назад</a>
+    <h1 class="page-title">Выставление оценок</h1>
+  </div>
+
+  <div class="toolbar">
+    <label class="toolbar-item">Предмет
+      <input class="toolbar-input" id="subject" list="subjects" maxlength="100" placeholder="например, Математика" autocomplete="off">
+    </label>
+    <datalist id="subjects"></datalist>
+    <label class="toolbar-item">Дата урока
+      <input class="toolbar-input" id="newDate" type="date">
+    </label>
+    <button class="btn-enter" id="addDate" type="button">+ колонка</button>
+  </div>
+
+  <div class="col-mid standalone wide">
+    <!-- окно выставления оценок учащимся -->
+    <div class="table-panel">
+      <div class="table-head">
+        <a class="btn-back" href="groups.html">back</a>
+        <h2 class="group-name" id="groupName">group name</h2>
+      </div>
+      <p class="table-hint" id="hint"></p>
+      <div class="table-scroll">
+        <table class="grades-table" id="table"></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- попап выбора оценки -->
+<div class="overlay" id="pickerOverlay">
+  <div class="grade-column" id="gradeColumn"></div>
+</div>
+
+<!-- попап выставления оценки ученику -->
+<div class="overlay" id="commentOverlay">
+  <div class="popup-card">
+    <button class="close-x" id="closeComment" type="button" aria-label="Закрыть">✕</button>
+    <div class="popup-top">
+      <div class="tags-stack">
+        <div class="tag tag-block" id="popAssign"></div>
+        <div class="tag tag-block" id="popStudent"></div>
+      </div>
+      <div class="field field-wide field-center" id="popStudentComment">student comment</div>
+    </div>
+    <div class="popup-bottom">
+      <div class="avatar" id="popAvatar">H</div>
+      <input class="field field-grow" id="popTeacherComment" maxlength="2000" placeholder="teacher comment" autocomplete="off">
+      <button class="btn-enter" id="popEnter" type="button">enter</button>
+    </div>
+    <button class="link-danger" id="popDelete" type="button" hidden>удалить оценку</button>
+  </div>
+</div>
+
+<script type="module" src="js/pages/grades.js"></script>
+</body>
+</html>

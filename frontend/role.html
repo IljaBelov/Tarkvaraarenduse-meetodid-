@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Выбор роли</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="role-body">
+
+<div class="role-wrap">
+  <h1 class="role-title">Кто вы?</h1>
+  <p class="role-sub">Выберите роль и себя в списке, чтобы продолжить</p>
+
+  <div class="role-cards">
+
+    <div class="role-card">
+      <div class="avatar role-avatar">У</div>
+      <div class="role-card-name">Ученик</div>
+      <div class="role-card-desc">Посмотреть свои оценки и комментарии учителя</div>
+      <select class="role-select" id="studentSelect" aria-label="Ученик">
+        <option value="">Выберите себя…</option>
+      </select>
+      <button class="tag role-enter" id="studentLogin" type="button">войти</button>
+    </div>
+
+    <div class="role-card">
+      <div class="avatar role-avatar">T</div>
+      <div class="role-card-name">Учитель</div>
+      <div class="role-card-desc">Выбрать класс и выставить оценки</div>
+      <select class="role-select" id="teacherSelect" aria-label="Учитель">
+        <option value="">Выберите себя…</option>
+      </select>
+      <button class="tag role-enter" id="teacherLogin" type="button">войти</button>
+    </div>
+
+  </div>
+</div>
+
+<script type="module" src="js/pages/role.js"></script>
+</body>
+</html>

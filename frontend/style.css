@@ -1,0 +1,532 @@
+/* ===========================================================
+   Design mockup — recreated 1:1 from the reference wireframe
+   =========================================================== */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 32px;
+  background: #f2f2f0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #2b2b2b;
+}
+
+.board {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.col { display: flex; flex-direction: column; }
+.col-left  { width: 516px; }
+.col-mid   { width: 520px; }
+.col-right { width: 140px; }
+
+/* ---------- shared bits ---------- */
+.tag {
+  background: #e2362b;
+  color: #fff;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 3px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 50%;
+  background: #e2362b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.field {
+  background: #fff;
+  border: 1px solid #d8d2b4;
+  border-radius: 2px;
+  color: #333;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.caption {
+  margin: 14px 0 0;
+  font-size: 26px;
+  color: #1c1c1c;
+}
+.caption-center { text-align: center; }
+.caption-right  { text-align: right; }
+
+
+/* ===========================================================
+   LEFT COLUMN — страница ученика
+   =========================================================== */
+.stack {
+  background: #fdfcf7;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.entry {
+  background: #e9e2c0;
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.entry-top {
+  display: grid;
+  grid-template-columns: minmax(140px, max-content) 1fr;
+  grid-template-rows: auto auto;
+  gap: 4px 8px;
+}
+.entry-top .tag-block { grid-column: 1; }
+.entry-top .field-top {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  height: 56px;
+  padding: 0 14px;
+}
+
+.entry-bottom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.field-bottom {
+  flex: 1;
+  height: 48px;
+  padding: 0 16px;
+  justify-content: space-between;
+}
+.stars { color: #c9c9c9; font-size: 16px; letter-spacing: 2px; }
+
+
+/* ===========================================================
+   MIDDLE COLUMN
+   =========================================================== */
+
+/* --- popup: выстовление оценки ученику --- */
+.popup-card {
+  position: relative;
+  background: #e9e2c0;
+  border-radius: 6px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.close-x {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #e2362b;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-top {
+  display: grid;
+  grid-template-columns: minmax(150px, max-content) 1fr;
+  grid-template-rows: auto auto;
+  gap: 6px 10px;
+}
+.tags-stack {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field-wide {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  height: 66px;
+  padding: 0 16px;
+}
+.field-center { justify-content: center; }
+
+.popup-bottom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.field-grow {
+  flex: 1;
+  height: 48px;
+  padding: 0 16px;
+}
+.btn-enter {
+  background: #e2362b;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  font-size: 15px;
+  font-weight: 700;
+  height: 48px;
+  padding: 0 24px;
+  cursor: pointer;
+}
+
+/* --- окно выбора класса --- */
+.groups-panel {
+  background: #ffffff;
+  margin-top: 24px;
+  padding: 20px;
+}
+.groups-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.grupe {
+  background: #e9e2c0;
+  color: #1c1c1c;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  padding: 16px 8px;
+  border-radius: 2px;
+}
+
+/* --- окно выставления оценок учащимся --- */
+.table-panel {
+  background: #e9e2c0;
+  margin-top: 20px;
+  border-radius: 4px;
+  padding: 0 0 4px;
+}
+.table-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 12px 14px;
+}
+.btn-back {
+  position: absolute;
+  left: 14px;
+  background: #e2362b;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  font-size: 13px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+.group-name {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.table-scroll { overflow-x: auto; }
+.grades-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 13px;
+}
+.grades-table th,
+.grades-table td {
+  border: 1px solid #2b2b2b;
+  padding: 6px 8px;
+  text-align: center;
+  height: 26px;
+}
+.grades-table thead th { font-weight: 400; }
+.grades-table td.student { text-align: left; }
+.grades-table th.corner {
+  position: relative;
+  text-align: left;
+  background: linear-gradient(to top left, transparent calc(50% - 0.5px), #2b2b2b, transparent calc(50% + 0.5px));
+}
+.corner-a { position: absolute; bottom: 4px; left: 6px; font-size: 12px; }
+.corner-b { position: absolute; top: 2px; right: 8px; font-size: 12px; }
+.grades-table td.grade-cell { color: #333; }
+
+
+/* ===========================================================
+   RIGHT COLUMN — попап выбора оценки
+   =========================================================== */
+.grade-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.grade-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #e2362b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+}
+.col-right .caption { text-align: center; }
+
+
+/* ===========================================================
+   Standalone pages (student.html / groups.html / grades.html)
+   =========================================================== */
+.page {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+.page-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.btn-link {
+  text-decoration: none;
+  font-weight: 700;
+}
+.page-title {
+  margin: 0;
+  font-size: 28px;
+  color: #1c1c1c;
+}
+
+/* when a column is used on its own page (not inside .board) */
+.col-left.standalone,
+.col-mid.standalone { width: 100%; max-width: 560px; }
+.col-mid.standalone .groups-panel,
+.col-mid.standalone .table-panel { width: 100%; }
+.col-right.standalone { width: 140px; }
+
+.board-grades {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.grupe { cursor: pointer; text-decoration: none; }
+
+
+/* ===========================================================
+   Role selection screen (role.html)
+   =========================================================== */
+.role-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.role-wrap {
+  text-align: center;
+  max-width: 620px;
+}
+.role-title {
+  margin: 0 0 6px;
+  font-size: 34px;
+  color: #1c1c1c;
+}
+.role-sub {
+  margin: 0 0 32px;
+  color: #6b6b6b;
+  font-size: 15px;
+}
+.role-cards {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.role-card {
+  background: #e9e2c0;
+  border-radius: 8px;
+  width: 240px;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #1c1c1c;
+  transition: transform .12s ease;
+}
+.role-card:hover { transform: translateY(-3px); }
+.role-avatar { width: 64px; height: 64px; font-size: 26px; }
+.role-card-name { font-size: 19px; font-weight: 700; }
+.role-card-desc { font-size: 13px; color: #5a5646; line-height: 1.4; min-height: 36px; }
+.role-enter { margin-top: 8px; }
+
+
+/* ===========================================================
+   Функциональные страницы (подключены к API)
+   =========================================================== */
+button.tag { border: none; cursor: pointer; font-family: inherit; }
+a.btn-back { text-decoration: none; display: inline-block; }
+.empty { margin: 8px; color: #6b6b6b; font-size: 15px; }
+.whoami { margin-left: auto; color: #6b6b6b; font-size: 14px; }
+
+/* выбор роли: селекты */
+.role-select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 9px 10px;
+  font: inherit;
+  font-size: 14px;
+  background: #fff;
+  border: 1px solid #d8d2b4;
+  border-radius: 3px;
+}
+
+/* лента ученика */
+.grade-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 12px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #e2362b;
+  color: #fff;
+  font-weight: 700;
+}
+.student-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  color: #333;
+  min-width: 0;
+}
+.student-input:focus { box-shadow: 0 1px 0 #e2362b; }
+.stars .star {
+  background: none;
+  border: none;
+  padding: 0 1px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.stars .star.on { color: #f2b01e; }
+.stars .star:hover { color: #f2b01e; }
+
+/* панель над таблицей */
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.toolbar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: #555;
+}
+.toolbar-input {
+  padding: 9px 10px;
+  font: inherit;
+  font-size: 14px;
+  color: #222;
+  background: #fff;
+  border: 1px solid #d8d2b4;
+  border-radius: 3px;
+  min-width: 220px;
+}
+.toolbar .btn-enter { height: 38px; }
+
+.col-mid.standalone.wide { max-width: none; }
+.table-hint { margin: 0; padding: 4px 14px 10px; font-size: 13px; color: #6b6b6b; text-align: center; }
+.table-hint:empty { display: none; }
+
+.grades-table td.cell { cursor: pointer; min-width: 64px; font-weight: 700; }
+.grades-table td.cell:hover { background: #f3efd9; }
+.grades-table td.student,
+.grades-table th.corner { position: sticky; left: 0; background-color: #fff; min-width: 190px; }
+.grades-table th.corner {
+  background-image: linear-gradient(to top left, transparent calc(50% - 0.5px), #2b2b2b, transparent calc(50% + 0.5px));
+  height: 40px;
+}
+
+/* попапы-оверлеи */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(30, 28, 20, 0.5);
+}
+.overlay.open { display: flex; }
+.overlay .popup-card { width: min(540px, 100%); }
+.overlay .grade-column { background: #fff; padding: 18px 20px; border-radius: 8px; }
+button.grade-circle { border: none; cursor: pointer; font-family: inherit; }
+button.grade-circle:hover { background: #c42a20; }
+.grade-circle.current { box-shadow: 0 0 0 3px #f2b01e; }
+input.field { font-family: inherit; }
+.field-center.is-placeholder { color: #8a8a8a; }
+.link-danger {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 13px;
+  color: #b3261e;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* уведомления */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 16px);
+  z-index: 100;
+  padding: 10px 18px;
+  background: #2b2b2b;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.toast.toast-error { background: #b3261e; }
+
+
+/* ---------- responsive ---------- */
+@media (max-width: 1250px) {
+  .board { justify-content: center; }
+  .board-grades { flex-wrap: wrap; justify-content: center; }
+}
