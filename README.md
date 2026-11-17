@@ -37,11 +37,11 @@ mysql -u root -p < backend/db/schema.sql
 mysql -u root -p < backend/db/seed.sql          # тестовые данные (необязательно)
 
 # отдельный пользователь вместо root:
-mysql -u root -p -e "CREATE USER 'gradebook'@'localhost' IDENTIFIED BY 'СВОЙ_ПАРОЛЬ';
-                     GRANT ALL ON gradebook.* TO 'gradebook'@'localhost';"
+mysql -u root -p -e "CREATE USER 'root'@'localhost' IDENTIFIED BY 'MySQL1234';
+                     GRANT ALL ON root.* TO 'root'@'localhost';"
 
 # 2. Сервер (тоже из корня проекта): статика из frontend/, /api/* -> backend/api
-DB_USER=gradebook DB_PASS=СВОЙ_ПАРОЛЬ php -S localhost:8000 -t frontend backend/router.php
+DB_USER=root DB_PASS=MySQL1234 php -S localhost:8000 -t frontend backend/router.php
 
 # 3. Открыть http://localhost:8000
 ```
@@ -49,7 +49,7 @@ DB_USER=gradebook DB_PASS=СВОЙ_ПАРОЛЬ php -S localhost:8000 -t fronten
 Windows (PowerShell):
 
 ```powershell
-$env:DB_USER="gradebook"; $env:DB_PASS="СВОЙ_ПАРОЛЬ"
+$env:DB_USER="root"; $env:DB_PASS="MySQL1234"
 php -S localhost:8000 -t frontend backend/router.php
 ```
 
